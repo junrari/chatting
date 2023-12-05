@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <div class="container">
+        <form id="signupForm" method="post" action="/joinuser" onsubmit="return validateForm()">
+            <h2>Sign Up</h2>
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+       
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required readonly>
+            <button class="btn_input" id="idDuplication" onclick="opencheckIDwindow()">Duplication Check</button>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            
+            <button class="btn_input" type="submit" id="register">register</button>
+        </form>
+       
+
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+
+    <script>
+
+
+        console.log(fullname, email, username, password, confirmPassword)
+        function opencheckIDwindow() {
+            const url = "./idCheckForm.html"
+
+            window.open(url, '_blank', 'width=600, height=400');
+        }
+       
+
+        function validateForm() {
+           
+            let fullname = document.getElementById("fullname").value;
+            let email = document.getElementById("email").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+
+            if (fullname === '' || email === '' || password === '' || confirmPassword === '') {
+                console.log(fullname, email, password, confirmPassword)
+                alert('Please fill in all fields');
+
+                return false;
+            }
+
+            if (document.getElementById("idDuplication").disabled !== true) {
+                alert('Please check duplication');
+                
+                
+                return false;
+            }
+            if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    return false;
+                }
+                alert(`${username}님 환영합니다`);
+            return true;
+        }
+
+    </script>
+</body>
+<%-include('footer.ejs')%>
+</html>
