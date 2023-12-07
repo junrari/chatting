@@ -1,5 +1,5 @@
 const {createServer}= require("http")
-const app = require("./app")
+const app = require("./app2")
 const {Server} = require("socket.io")
 require("dotenv").config();
 

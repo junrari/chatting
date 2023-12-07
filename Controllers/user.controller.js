@@ -19,5 +19,9 @@ userController.saveUser=async(userName,sid)=>{
     await user.save();
     return user;
 }
-
-module.exports =userController
+userController.checkUser=async(sid)=>{
+    const user = await User.findOne({token:sid})
+    if(!user) throw new Error("user not found")
+    return user;
+}
+module.exports = userController
